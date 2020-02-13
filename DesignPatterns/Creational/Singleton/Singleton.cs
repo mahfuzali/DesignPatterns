@@ -4,11 +4,11 @@ using System.Text;
 
 namespace DesignPatterns.Singleton
 {
-    class Singleton
+    public sealed class Singleton
     {
-        private Singleton() { }
+        private static Singleton _instance = null;
 
-        private static Singleton _instance;
+        private Singleton() { }
 
         public static Singleton GetInstance()
         {
@@ -20,15 +20,15 @@ namespace DesignPatterns.Singleton
         }
     }
 
-    class ThreadSafeSingle
+    public sealed class ThreadSafeSingleton
     {
-        private ThreadSafeSingle() { }
-
-        private static ThreadSafeSingle _instance;
+        private static ThreadSafeSingleton _instance;
 
         private static readonly object _lock = new object();
 
-        public static ThreadSafeSingle GetInstance(string value)
+        private ThreadSafeSingleton() { }
+
+        public static ThreadSafeSingleton GetInstance(string value)
         {
 
             if (_instance == null)
@@ -37,14 +37,12 @@ namespace DesignPatterns.Singleton
                 {
                     if (_instance == null)
                     {
-                        _instance = new ThreadSafeSingle();
-                        _instance.Value = value;
+                        _instance = new ThreadSafeSingleton();
                     }
                 }
             }
             return _instance;
         }
 
-        public string Value { get; set; }
     }
 }

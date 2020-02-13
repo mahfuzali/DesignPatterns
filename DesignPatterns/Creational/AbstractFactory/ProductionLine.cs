@@ -4,9 +4,6 @@ using System.Text;
 
 namespace DesignPatterns.AbstractFactory
 {
-    class ProductionLine
-    {
-    }
 
     public interface IProductionLine
     {
